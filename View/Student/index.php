@@ -1,0 +1,10 @@
+<?php
+	require_once("../Shared/index.php");
+	require_once("../Shared/app.php");
+	require_once("_headers/includes.php");
+	require_once("_headers/header.php");
+	require_once("_headers/app-menu.php");
+	require_once("_call.php");
+	display("dashboard");
+	require_once("_footer/footer.php");
+?>
