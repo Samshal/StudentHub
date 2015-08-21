@@ -13,6 +13,7 @@
 	DEFINE("FULLNAME", $_name[0]["FirstName"]." ".$_name[0]["MiddleName"]." ".$_name[0]["LastName"]);
 	DEFINE("FIRSTNAME", $_name[0]["FirstName"]);
 	DEFINE("LASTNAME", $_name[0]["LastName"]);
+	DEFINE("MIDDLENAME", $_name[0]["MiddleName"]);
 
 
 
