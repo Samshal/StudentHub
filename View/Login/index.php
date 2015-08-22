@@ -19,9 +19,9 @@
 			$(".container").hide();
 			$(window).load(function() {
 				// Animate loader off screen
-				$(".se-pre-con").fadeOut(2000);
+				$(".se-pre-con").fadeOut(5000);
 				setTimeout(function(){
-					$(".container").show().fadeIn("slow");
+					$(".container").show().fadeIn(4000);
 				}, 4000);
 			});
 		</script>
