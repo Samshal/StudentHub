@@ -24,6 +24,7 @@ $(document).ready(function(){
 				var max = 20;
 				var min = 1;
 				var rand = (Math.floor(Math.random() * (max - min + 1)) + min);
+				console.log(rand);
 				var img = "css/images/bg/"+rand+".jpg";
 				$("#slider > img").fadeIn(4000).attr("src", img);
 			}, 2000)
