@@ -1,5 +1,6 @@
 <div class="col-md-12">
 	<div class="row">
+		<div class="text-center center-block" id="information"></div>
 		<div class="text-center center-block form-header" ><h2>Fill In The Form Below To Become A Part Of StudentHub</h2></div>
 		<form role="form" id="registrationform">
 			<div class="col-md-12">
@@ -55,16 +56,15 @@
 				<textarea id="HOMEADDRESS" name="HOMEADDRESS" class="form-control">Current Home Address</textarea>
 			</div>
 			<div class="form-group">
-				<center>
+				<span style="padding-left: 400px">
 				<label>
-					<input type="checkbox" style="width: 15px; height: 15px;" class="form-control" id="CONTINUE" name="CONTINUE" value="1"/><span style="padding: 0px 0px 0px -100px;">I am not a robot, I know exactly what I'm doing</span>
+					<input type="checkbox" style="width: 15px; height: 15px;" class="form-control" id="CONTINUE" name="CONTINUE" value="1"/><span style="padding: 0px 0px 0px 20px; position: absolute; top: 415px">I am not a robot, I know exactly what I'm doing</span>
 				</label>
-				</center>
+				</span>
 			</div>
 			<button role="submit" class="col-md-5 col-md-offset-3 btn btn-success registration-submit">Continue Registration <span><i class="glyphicon glyphicon-circle-arrow-right"></i></span></button>
 		</div>
 		</form>
 	</div>
-		<div class="text-center center-block" id="information"></div>
 </div>
 <script src = "Server/registration.js"></script>
