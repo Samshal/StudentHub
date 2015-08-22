@@ -33,7 +33,7 @@
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i> Password</span>
-				<input type="text" id="PASSWORD" name="PASSWORD" class="form-control login-text-input" placeholder="enter your password" />
+				<input type="password" id="PASSWORD" name="PASSWORD" class="form-control login-text-input" placeholder="enter your password" />
 			</div>
 			<div class="checkbox">
 				<label>
