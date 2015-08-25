@@ -1,9 +1,9 @@
 <ul class="sidebar-menu">
     <li class="active">
-        <a href="index.html">
+        <a href="?page=dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
-    </li>
+    </li><!-- 
     <li>
         <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
@@ -61,13 +61,13 @@
             <i class="fa fa-calendar"></i> <span>Calendar</span>
             <small class="badge pull-right bg-red">3</small>
         </a>
-    </li>
+    </li> -->
     <li>
-        <a href="pages/mailbox.html">
+        <a href="?page=mailbox">
             <i class="fa fa-envelope"></i> <span>Mailbox</span>
             <small class="badge pull-right bg-yellow">12</small>
         </a>
-    </li>
+    </li><!-- 
     <li class="treeview">
         <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
@@ -82,5 +82,5 @@
             <li><a href="pages/examples/500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
             <li><a href="pages/examples/blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
         </ul>
-    </li>
+    </li> -->
 </ul>   
