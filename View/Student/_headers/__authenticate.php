@@ -7,6 +7,15 @@
 	}
 	else
 	{
-		require_once("../".__CONTROLLER_FOLDER."/Student/session.php");
+		include_once("../".__CONTROLLER_FOLDER."/Student/complete.php");
+		if (!$complete)
+		{
+			header("Location: complete.php");
+		}
+		else
+		{
+			unset($complete);
+			require_once("../".__CONTROLLER_FOLDER."/Student/session.php");
+		}
 	}
 ?>
