@@ -118,6 +118,46 @@
 
 		}
 
+		public function isProfileComplete($usertype, $userid)
+		{
+			if (is_int((int)$usertype) && is_int((int)$userid))
+			{
+				switch($usertype)
+				{
+					case 1:
+					{
+						$complete = self::Select("[Students].[Account]", array("Complete"), array("Student"=>$userid))[0]["Complete"];
+						break;
+					}
+					default:
+					{
+						throw new \Exception("Invalid User Type Supplied");
+					}
+				}
+				return $complete;
+			}
+		}
+
+		public function completeProfile($usertype, $userid)
+		{
+			if (is_int((int)$usertype) && is_int((int)$userid))
+			{
+				switch($usertype)
+				{
+					case 1:
+					{
+						$complete = self::Update("[Students].[Account]", array("Complete"=>1), array("Student"=>$userid));
+						break;
+					}
+					default:
+					{
+						throw new \Exception("Invalid User Type Supplied");
+					}
+				}
+				return $complete;
+			}
+		}
+
 		private function generateGuid()
 		{
 			$rand1 = rand(100, 100000);
@@ -161,11 +201,15 @@
 				$studentid = (is_array(self::Select("[Students].[Info]", array("StudentID"), array("Email"=>"'$email'"))))?self::Select("[Students].[Info]", array("StudentID"), array("Email"=>"'$email'"))[0]["StudentID"]:NULL;
 				$query1 = self::Execute("INSERT INTO [Students].[Profile] (Student) VALUES ($studentid)");
 				$query2 = self::Execute("INSERT INTO [Students].[Account] (Student, Complete, DateJoined) VALUES ($studentid, 0, '".self::currentDate()."')");
-				if (!$query1 || !$query2)
+				$query3 = self::Execute("INSERT INTO [Students].[Semester] (Student, Semester) VALUES ($studentid, NULL)");
+				$query4 = self::Execute("INSERT INTO [Students].[Course] (Student, Course) VALUES ($studentid, NULL)");
+				if (!$query1 || !$query2 || !$query3 || !$query4)
 				{
 					if (!$query1){ echo $query1; }
 					if (!$query2){ echo $query2; }
-					$query3 = self::Delete("[Students].[Info]", array("StudentID"=>$studentid));
+					if (!$query3){ echo $query3; }
+					if (!$query4){ echo $query4; }
+					$query5 = self::Delete("[Students].[Info]", array("StudentID"=>$studentid));
 					return false;		
 				}
 			}
@@ -286,10 +330,16 @@
 				//throw an exception
 				exit();
 			}
+			
 			$profileauthor = $params["PROFILEUSER"];
-			$picture = $params["PROFILEPICTURE"];
-			$tagline = $params["PROFILETAGLINE"];
-			$string = array($profileauthor=>"int", $picture=>"string", $tagline=>"string");
+			if (isset($params["PROFILEPICTURE"]))
+			{
+				$picture = $params["PROFILEPICTURE"];
+			}
+			if (isset($params["PROFILETAGLINE"]))
+			{
+				$tagline = $params["PROFILETAGLINE"];
+			}
 			$profile = ucfirst(strtolower($user));
 			if ($profile != "Student" && $profile != "Administrator" && $profile != "Faculty")
 			{
@@ -318,9 +368,15 @@
 					exit();
 				}
 			}
-			$query = "INSERT INTO $table VALUES(".self::ArrayToQuery($string);
-			$result = self::Execute($query);
-			return $result;			
+			if (isset($picture))
+			{
+				self::Update($table, array("Picture"=>$picture), array($profile=>$profileauthor));
+			}
+			if (isset($tagline))
+			{
+				self::Update($table, array("TagLine"=>$tagline), array($profile=>$profileauthor));
+			}
+			return 1;
 		}
 		protected function checkLogin($table, $username)
 		{
@@ -561,6 +617,32 @@
 			return $result;
 		}
 
+		public function Courses($id = null)
+		{
+			if (!is_null($id))
+			{
+				$course = self::Select("[General].[Course]", array("*"), array("CourseID"=>$id));
+			}
+			else
+			{
+				$course = self::Select("[General].[Course]", array("*"), array());
+			}
+			return $course;
+		}
+
+		public function Semesters($id = null)
+		{
+			if (!is_null($id))
+			{
+				$semester = self::Select("[General].[Semester]", array("*"), array("SemesterID"=>$id));
+			}
+			else
+			{
+				$semester = self::Select("[General].[Semester]", array("*"), array());
+			}
+			return $semester;
+		}
+
 		public function StudentCourse($params)
 		{
 			if (!self::checktype($params, "array"))
@@ -570,9 +652,7 @@
 			}
 			$student = $params["STUDENT"];
 			$course = $params["COURSE"];
-			$string = array($student=>"int", $course=>"int");
-			$query = "INSERT INTO [Students].[Course] VALUES(".self::ArrayToQuery($string);
-			$result = self::Execute($query);
+			$result = self::Update("[Students].[Course]", array("Course"=>$course), array("Student"=>$student));
 			return $result;
 		}
 
@@ -586,10 +666,10 @@
 			$student = $params["STUDENT"];
 			$semester = $params["SEMESTER"];
 			$string = array($student=>"int", $semester=>"int");
-			$query = "INSERT INTO [Students].[Semester] VALUES(".self::ArrayToQuery($string);
-			$result = self::Execute($query);
+			$result = self::Update("[Students].[Semester]", array("Semester"=>$semester), array("Student"=>$student));
 			return $result;
 		}
+
 
 		public function Update($table, $params, $id)
 		{
@@ -636,14 +716,7 @@
 				$counter += 1;
 			}
 			$result = self::Execute($query);
-			if ($result == 1)
-			{
-				return true;
-			}
-			else
-			{
-				return $result;
-			}
+			return $result;
 		}
 
 		public function Select($table, $params, $id)
