@@ -6,31 +6,25 @@
 <ul class="dropdown-menu">
     <!-- User image -->
     <li class="user-header bg-light-blue">
-        <img src="img/avatar3.png" class="img-circle" alt="User Image" />
+        <img src="<?php echo "../../__TempFiles/__Uploads/Students/".IMAGESRC;?>" class="img-circle" alt="User Image" />
         <p>
-            <?php echo FULLNAME; ?> <br/> Web Developer
-            <small>Member since Nov. 2012</small>
+            <?php echo FULLNAME; ?> <br/> <?php echo COURSENAME; ?>
+            <small><?php echo SEMESTERNAME; ?></small>
         </p>
     </li>
     <!-- Menu Body -->
     <li class="user-body">
-        <div class="col-xs-4 text-center">
-            <a href="#">Followers</a>
-        </div>
-        <div class="col-xs-4 text-center">
-            <a href="#">Sales</a>
-        </div>
-        <div class="col-xs-4 text-center">
-            <a href="#">Friends</a>
+         <div class="col-xs-12 text-center">
+            <span class="text-info"><?php echo TAGLINE; ?></span>
         </div>
     </li>
     <!-- Menu Footer-->
     <li class="user-footer">
         <div class="pull-left">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
+            <a href="#" class="btn btn-default btn-flat btn-info"><i class="fa fa-edit"></i> Edit Your Profile</a>
         </div>
         <div class="pull-right">
-            <a href="<?php echo '../'.__CONTROLLER_FOLDER.'\Login\logout.php?LOGOUTREASON=END OF SESSION&USERTYPE=Student'; ?>" class="btn btn-default btn-flat">Sign out</a>
+            <a href="<?php echo '../'.__CONTROLLER_FOLDER.'\Login\logout.php?LOGOUTREASON=END OF SESSION&USERTYPE=Student'; ?>" class="btn btn-default btn-flat btn-danger"><i class="fa fa-sign-out"></i> Sign out</a>
         </div>
     </li>
 </ul>
