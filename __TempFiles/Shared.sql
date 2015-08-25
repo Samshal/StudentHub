@@ -59,7 +59,8 @@ GO
 CREATE TABLE [Shared].[MessageContent]
 (
 	MessageContentID int IDENTITY(1, 1),
-	Message int, Content VARCHAR(140), 
+	Message int, Title VARCHAR(50),
+	Content VARCHAR(140), 
 	MessageDate datetime, Seen int
 )
 GO
