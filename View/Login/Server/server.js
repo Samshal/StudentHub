@@ -62,7 +62,10 @@ $(document).ready(function(){
 				}
 				$("#information").fadeIn(1200).append(alert);
 				setTimeout(function(){
-					$("#information").html("");
+					if (response != '1')
+					{
+						$("#information").html("");
+					}
 					$(".login-button-input").html("Redirecting  <img src = '../../__External/AjaxLoaders/ajax-loader.gif' />");
 				}, 4000);
 				if (ve)
